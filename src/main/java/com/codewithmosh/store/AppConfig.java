@@ -21,7 +21,6 @@ public class AppConfig {
     }
 
     @Bean
-    @Scope("prototype")
     public OrderService orderService() {
         if (paymentGateway.equals("stripe")) {
             return new OrderService(stripe());
