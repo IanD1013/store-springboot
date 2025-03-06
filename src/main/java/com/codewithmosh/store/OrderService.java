@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class OrderService {
     private PaymentService paymentService;
 
-    public OrderService(@Qualifier("paypal") PaymentService paymentService) {
+    public OrderService(@Qualifier("stripe") PaymentService paymentService) {
         this.paymentService = paymentService;
     }
 
