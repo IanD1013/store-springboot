@@ -1,5 +1,6 @@
 package com.codewithmosh.store.services;
 
+import com.codewithmosh.store.entities.Address;
 import com.codewithmosh.store.entities.User;
 import com.codewithmosh.store.repositories.AddressRepository;
 import com.codewithmosh.store.repositories.ProfileRepository;
@@ -46,5 +47,23 @@ public class UserService {
 
     public void fetchAddress() {
         var address = addressRepository.findById(1L).orElseThrow();
+    }
+
+    public void persistRelated() {
+        var user = User.builder()
+                .name("John Doe")
+                .email("john.doe@example.com")
+                .password("password")
+                .build();
+
+        var address = Address.builder()
+                .street("street")
+                .city("city")
+                .zip("zip")
+                .build();
+
+        user.addAddress(address);
+
+        userRepository.save(user);
     }
 }
