@@ -7,8 +7,6 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-
 @AllArgsConstructor
 @Service
 public class UserService {
@@ -92,9 +90,12 @@ public class UserService {
     }
 
     @Transactional
-    public void fetchUser() {
-        var user = userRepository.findByEmail("ian.tung@gmail.com").orElseThrow();
-        System.out.println(user);
+    public void fetchUsers() {
+        var user = userRepository.findAllWithAddresses();
+        user.forEach(u -> {
+            System.out.println(u);
+            u.getAddresses().forEach(System.out::println);
+        });
     }
 
 }
