@@ -92,4 +92,10 @@ public class UserService {
         products.forEach(System.out::println);
     }
 
+    @Transactional
+    public void printLoyaltyProfiles() {
+        var users = userRepository.findLoyalUsers(2);
+        users.forEach(p -> System.out.println(p.getId() + ": " + p.getEmail()));
+
+    }
 }
