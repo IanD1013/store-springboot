@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @Service
 public class UserService {
@@ -84,18 +86,10 @@ public class UserService {
         productRepository.deleteById(1L);
     }
 
-    public void fetchProducts() {
-        var products = productRepository.findByCategory(new Category((byte)1));
-        products.forEach(System.out::println);
-    }
-
     @Transactional
-    public void fetchUsers() {
-        var user = userRepository.findAllWithAddresses();
-        user.forEach(u -> {
-            System.out.println(u);
-            u.getAddresses().forEach(System.out::println);
-        });
+    public void fetchProducts() {
+        var products = productRepository.findProducts(BigDecimal.valueOf(1), BigDecimal.valueOf(15));
+        products.forEach(System.out::println);
     }
 
 }
