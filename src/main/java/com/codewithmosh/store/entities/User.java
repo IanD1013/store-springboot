@@ -70,4 +70,8 @@ public class User {
         this.tags.add(tag);
         tag.getUsers().add(this);
     }
+
+    public void addFavoriteProduct(Product product) {
+        favoriteProducts.add(product);
+    }
 }
