@@ -1,10 +1,7 @@
 package com.codewithmosh.store.services;
 
 import com.codewithmosh.store.entities.*;
-import com.codewithmosh.store.repositories.AddressRepository;
-import com.codewithmosh.store.repositories.ProductRepository;
-import com.codewithmosh.store.repositories.ProfileRepository;
-import com.codewithmosh.store.repositories.UserRepository;
+import com.codewithmosh.store.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -20,6 +17,7 @@ public class UserService {
     private final EntityManager entityManager;
     private final AddressRepository addressRepository;
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     @Transactional
     public void showEntityStates() {
@@ -83,12 +81,13 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void manageProducts() {
-        var category = new Category("Category 1");
+        var category = categoryRepository.findById((byte)1).orElseThrow();
 
         var product = Product.builder()
-                .name("Product 1")
-                .description("Description 1")
+                .name("Product 2")
+                .description("Description 2")
                 .price(BigDecimal.valueOf(10.99))
                 .category(category)
                 .build();
